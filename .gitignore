@@ -88,3 +88,5 @@ docs/_build/
 # OS files
 .DS_Store
 Thumbs.db
+
+idea.md
