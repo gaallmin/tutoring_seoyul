@@ -8,7 +8,7 @@ class CalculatorApp:
         self.root = root
         self.root.title("Interactive Calculator with Graphing")
 
-        # 입력칸
+        # Input field
         self.expression = ""
         self.input_text = tk.StringVar()
 
@@ -18,7 +18,7 @@ class CalculatorApp:
         input_field = tk.Entry(input_frame, textvariable=self.input_text, font=('Arial', 18), bd=10, insertwidth=2, width=18, borderwidth=4)
         input_field.grid(row=0, column=0, columnspan=4)
 
-        # 버튼 칸
+        # Buttons layout
         button_frame = tk.Frame(self.root)
         button_frame.pack()
 
@@ -62,13 +62,16 @@ class CalculatorApp:
     def draw_graph(self):
         expression = self.expression
 
-        if 'x' in expression and '^' in expression:
+        # Check if the expression contains 'x'
+        if 'x' in expression:
             try:
-                x = np.linspace(-10, 10, 400)
-                y = eval(expression.replace('^', '**').replace('x', 'x'))
+                x = np.linspace(-10, 10, 400)  # Generate 400 points between -10 and 10 for x
+                y = eval(expression.replace('^', '**'))  # Replace ^ with ** for exponentiation
+
+                # Plot the graph
                 plt.figure(figsize=(6, 4))
                 plt.plot(x, y, label=f'y = {expression}')
-                plt.title('Graph')
+                plt.title('Graph of the Function')
                 plt.xlabel('x')
                 plt.ylabel('y')
                 plt.legend()
@@ -77,10 +80,9 @@ class CalculatorApp:
             except Exception as e:
                 messagebox.showerror("Error", "Unable to plot graph. Ensure the expression is a valid function of x.")
         else:
-            messagebox.showwarning("Input Needed", "Enter an expression to draw a graph.")
+            messagebox.showwarning("Input Needed", "Enter an expression involving 'x' to draw a graph.")
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = CalculatorApp(root)
     root.mainloop()
-

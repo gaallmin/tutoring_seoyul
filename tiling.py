@@ -20,7 +20,7 @@ class GridGUI:
         self.grid = [['.' for _ in range(grid_width)] for _ in range(grid_height)]
 
     def can_place_tile(self, row, col, tile):
-        """Check if the tile can be placed at the (row, col) position."""
+        """타일가능여부 표시"""
         if row + tile.height > self.grid_height or col + tile.width > self.grid_width:
             return False  # 타일 주어진 공간 초과
         # 타일 찾는지 확인
@@ -31,7 +31,7 @@ class GridGUI:
         return True
 
     def place_tile(self, row, col, tile):
-        """Place a tile on the grid if it fits."""
+        """타일배치"""
         if self.can_place_tile(row, col, tile):
             for i in range(tile.height):
                 for j in range(tile.width):
